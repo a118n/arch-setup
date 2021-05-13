@@ -23,8 +23,8 @@ mount /dev/nvme1n1p1 /mnt/efi
 swapon /dev/nvme1n1p2
 
 # Sort mirrors and install system
-# reflector --verbose --sort rate --save /etc/pacman.d/mirrorlist
-pacstrap /mnt base base-devel linux linux-firmware grub efibootmgr amd-ucode man-db man-pages texinfo terminus-font htop vim curl git lsof bash-completion ttf-cascadia-code xf86-video-amdgpu vulkan-radeon libva-mesa-driver mesa-vdpau ntfs-3g networkmanager bluez gdm gnome-shell gnome-terminal gedit gnome-tweaks eog evince file-roller gnome-keyring gnome-backgrounds gnome-calculator gnome-calendar gnome-clocks gnome-control-center gnome-disk-utility gnome-screenshot gnome-weather gnome-shell-extensions gvfs gvfs-mtp gvfs-smb nautilus sushi mpv lollypop transmission-gtk xdg-user-dirs-gtk youtube-dl
+reflector --verbose --sort rate --save /etc/pacman.d/mirrorlist
+pacstrap /mnt base base-devel linux linux-firmware grub efibootmgr amd-ucode man-db man-pages texinfo terminus-font htop vim curl git lsof bash-completion ttf-cascadia-code xf86-video-amdgpu vulkan-radeon libva-mesa-driver mesa-vdpau ntfs-3g networkmanager bluez gdm gnome-shell gnome-terminal gedit gnome-tweaks eog evince file-roller gnome-keyring gnome-backgrounds gnome-calculator gnome-calendar gnome-clocks gnome-control-center gnome-disk-utility gnome-screenshot gnome-weather gnome-shell-extensions gvfs gvfs-mtp gvfs-smb nautilus sushi mpv pipewire-alsa pipewire-pulse lollypop telegram-desktop transmission-gtk xdg-user-dirs-gtk xdg-desktop-portal xdg-desktop-portal-gtk youtube-dl
 
 # Generate fstab
 genfstab -U /mnt >> /mnt/etc/fstab
