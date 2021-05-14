@@ -53,6 +53,9 @@ sudo rm -f /usr/share/applications/qv4l2.desktop
 sudo rm -f /usr/share/applications/qvidcap.desktop
 sudo rm -f /usr/share/applications/vim.desktop
 
+# Reset app grid to alphabetical default
+gsettings set org.gnome.shell app-picker-layout "[]"
+
 # Fontconfig
 sudo ln -sfv /usr/share/fontconfig/conf.avail/10-sub-pixel-rgb.conf /etc/fonts/conf.d
 sudo ln -sfv /usr/share/fontconfig/conf.avail/11-lcdfilter-default.conf /etc/fonts/conf.d
