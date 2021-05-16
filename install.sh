@@ -3,7 +3,7 @@
 set -euo pipefail
 
 # Preliminary stuff
-setfont ter-132b
+setfont ter-132n
 iwctl --passphrase pYq4RQmT station wlan0 connect MGTS_GPON5_51EF
 sleep 10
 timedatectl set-ntp true
@@ -39,15 +39,12 @@ arch-chroot /mnt sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf
 # Configure timezone and locale
 arch-chroot /mnt ln -sf /usr/share/zoneinfo/Europe/Moscow /etc/localtime
 arch-chroot /mnt timedatectl set-timezone Europe/Moscow
-# arch-chroot /mnt hwclock --systohc
-arch-chroot /mnt timedatectl set-local-rtc 1
-arch-chroot /mnt timedatectl set-ntp true
 arch-chroot /mnt sed -i 's/#en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen
 arch-chroot /mnt locale-gen
 echo "LANG=en_US.UTF-8"  > /mnt/etc/locale.conf
 
 # Configure console font
-echo "FONT=ter-132b" > /mnt/etc/vconsole.conf
+echo "FONT=ter-132n" > /mnt/etc/vconsole.conf
 
 # Configure hostname
 echo "Obelisk" > /mnt/etc/hostname

@@ -2,6 +2,10 @@
 
 set -euo pipefail
 
+# Enable localtime & NTP
+timedatectl set-local-rtc 1
+timedatectl set-ntp true
+
 # Configure monitor for GNOME & GDM
 cat <<-EOF > ~/.config/monitors.xml
 <monitors version="2">
@@ -43,15 +47,15 @@ rm -rfv /tmp/yay*
 yay -S --noconfirm microsoft-edge-dev-bin visual-studio-code-bin spotify # gnome-shell-extension-dash-to-dock brave-bin
 
 # Clean unnecessary desktop entries
-sudo rm -f /usr/share/applications/avahi-discover.desktop
-sudo rm -f /usr/share/applications/bssh.desktop
-sudo rm -f /usr/share/applications/bvnc.desktop
-sudo rm -f /usr/share/applications/htop.desktop
-sudo rm -f /usr/share/applications/lstopo.desktop
-sudo rm -f /usr/share/applications/nm-connection-editor.desktop
-sudo rm -f /usr/share/applications/qv4l2.desktop
-sudo rm -f /usr/share/applications/qvidcap.desktop
-sudo rm -f /usr/share/applications/vim.desktop
+sudo rm -fv /usr/share/applications/avahi-discover.desktop
+sudo rm -fv /usr/share/applications/bssh.desktop
+sudo rm -fv /usr/share/applications/bvnc.desktop
+sudo rm -fv /usr/share/applications/htop.desktop
+sudo rm -fv /usr/share/applications/lstopo.desktop
+sudo rm -fv /usr/share/applications/nm-connection-editor.desktop
+sudo rm -fv /usr/share/applications/qv4l2.desktop
+sudo rm -fv /usr/share/applications/qvidcap.desktop
+sudo rm -fv /usr/share/applications/vim.desktop
 
 # Reset app grid to alphabetical default
 gsettings set org.gnome.shell app-picker-layout "[]"
