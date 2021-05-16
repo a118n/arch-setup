@@ -24,7 +24,8 @@ swapon /dev/nvme1n1p2
 
 # Sort mirrors and install system
 reflector --verbose --sort rate --save /etc/pacman.d/mirrorlist
-pacstrap /mnt base base-devel linux linux-firmware grub efibootmgr amd-ucode man-db man-pages texinfo terminus-font htop vim curl git lsof bash-completion ttf-cascadia-code xf86-video-amdgpu vulkan-radeon libva-mesa-driver mesa-vdpau ntfs-3g networkmanager baobab bluez gdm gnome-shell gnome-terminal gedit gnome-tweaks eog evince file-roller gnome-keyring gnome-backgrounds gnome-calculator gnome-calendar gnome-clocks gnome-control-center gnome-disk-utility gnome-remote-desktop gnome-screenshot gnome-system-monitor gnome-user-share gnome-weather gnome-shell-extensions gvfs gvfs-mtp gvfs-smb nautilus sushi mpv pipewire-alsa pipewire-jack pipewire-pulse lollypop telegram-desktop transmission-gtk xdg-user-dirs-gtk xdg-desktop-portal xdg-desktop-portal-gtk youtube-dl qemu libvirt iptables-nft dnsmasq bridge-utils edk2-ovmf virt-manager discord docker
+# sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf
+pacstrap /mnt base base-devel linux linux-firmware grub efibootmgr amd-ucode man-db man-pages texinfo terminus-font htop vim curl git lsof bash-completion ttf-cascadia-code xf86-video-amdgpu mesa lib32-mesa vulkan-radeon lib32-vulkan-radeon libva-mesa-driver mesa-vdpau ntfs-3g networkmanager baobab bluez gdm gnome-shell gnome-terminal gedit gnome-tweaks eog evince file-roller gnome-keyring gnome-backgrounds gnome-calculator gnome-calendar gnome-clocks gnome-control-center gnome-disk-utility gnome-remote-desktop gnome-screenshot gnome-system-monitor gnome-user-share gnome-weather gnome-shell-extensions gvfs gvfs-mtp gvfs-smb nautilus sushi mpv pipewire-alsa pipewire-jack pipewire-pulse lollypop telegram-desktop transmission-gtk xdg-user-dirs-gtk xdg-desktop-portal xdg-desktop-portal-gtk youtube-dl qemu libvirt iptables-nft dnsmasq bridge-utils edk2-ovmf virt-manager discord docker flatpak
 
 # Generate fstab
 genfstab -U /mnt >> /mnt/etc/fstab
@@ -33,6 +34,7 @@ genfstab -U /mnt >> /mnt/etc/fstab
 arch-chroot /mnt sed -i 's/#Color/Color/' /etc/pacman.conf
 arch-chroot /mnt sed -i 's/#TotalDownload/TotalDownload/' /etc/pacman.conf
 arch-chroot /mnt sed -i 's/#VerbosePkgLists/VerbosePkgLists/' /etc/pacman.conf
+arch-chroot /mnt sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf
 
 # Configure timezone and locale
 arch-chroot /mnt ln -sf /usr/share/zoneinfo/Europe/Moscow /etc/localtime
@@ -58,6 +60,9 @@ echo "127.0.1.1    Obelisk.local    Obelisk" >> /mnt/etc/hosts
 arch-chroot /mnt grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id="Arch Linux"
 # Disable CPU mitigations
 arch-chroot /mnt sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT="[^"]*/& mitigations=off/' /etc/default/grub
+# Enable full AMD GPU control
+arch-chroot /mnt sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT="[^"]*/& amdgpu.ppfeaturemask=0xffffffff/' /etc/default/grub
+# Configure GRUB resolution
 arch-chroot /mnt sed -i 's/GRUB_GFXMODE=auto/GRUB_GFXMODE=2560x1440x32,1920x1080x32,auto/' /etc/default/grub
 
 arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
