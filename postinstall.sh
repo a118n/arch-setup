@@ -31,11 +31,6 @@ EOF
 sudo cp ~/.config/monitors.xml /var/lib/gdm/.config/monitors.xml
 sudo chown gdm:gdm /var/lib/gdm/.config/monitors.xml
 
-# Install flatpak apps
-flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
-flatpak install --assumeyes flathub com.valvesoftware.Steam
-
-
 # Install yay
 cd /tmp
 curl -LO https://aur.archlinux.org/cgit/aur.git/snapshot/yay.tar.gz

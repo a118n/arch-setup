@@ -25,7 +25,7 @@ swapon /dev/nvme1n1p2
 # Sort mirrors and install system
 reflector --verbose --sort rate --save /etc/pacman.d/mirrorlist
 # sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf
-pacstrap /mnt base base-devel linux linux-firmware grub efibootmgr amd-ucode man-db man-pages texinfo terminus-font htop vim curl git lsof bash-completion ttf-cascadia-code xf86-video-amdgpu mesa lib32-mesa vulkan-radeon lib32-vulkan-radeon libva-mesa-driver mesa-vdpau ntfs-3g networkmanager baobab bluez gdm gnome-shell gnome-terminal gedit gnome-tweaks eog evince file-roller gnome-keyring gnome-backgrounds gnome-calculator gnome-calendar gnome-clocks gnome-control-center gnome-disk-utility gnome-remote-desktop gnome-screenshot gnome-system-monitor gnome-user-share gnome-weather gnome-shell-extensions gvfs gvfs-mtp gvfs-smb nautilus sushi mpv pipewire-alsa pipewire-jack pipewire-pulse lollypop telegram-desktop transmission-gtk xdg-user-dirs-gtk xdg-desktop-portal xdg-desktop-portal-gtk youtube-dl qemu libvirt iptables-nft dnsmasq bridge-utils edk2-ovmf virt-manager discord docker flatpak
+pacstrap /mnt base base-devel linux linux-firmware grub efibootmgr amd-ucode man-db man-pages texinfo terminus-font htop vim curl git lsof bash-completion ttf-cascadia-code xf86-video-amdgpu mesa lib32-mesa vulkan-radeon lib32-vulkan-radeon libva-mesa-driver mesa-vdpau ntfs-3g networkmanager baobab bluez gdm gnome-shell gnome-terminal gedit gnome-tweaks eog evince file-roller gnome-keyring gnome-backgrounds gnome-calculator gnome-calendar gnome-clocks gnome-control-center gnome-disk-utility gnome-remote-desktop gnome-screenshot gnome-system-monitor gnome-user-share gnome-weather gnome-shell-extensions gvfs gvfs-mtp gvfs-smb nautilus sushi mpv pipewire-alsa pipewire-jack pipewire-pulse lollypop telegram-desktop transmission-gtk xdg-user-dirs-gtk xdg-desktop-portal xdg-desktop-portal-gtk youtube-dl qemu libvirt iptables-nft dnsmasq bridge-utils edk2-ovmf virt-manager discord docker steam
 
 # Generate fstab
 genfstab -U /mnt >> /mnt/etc/fstab
@@ -54,7 +54,6 @@ echo "Obelisk" > /mnt/etc/hostname
 echo "127.0.0.1    localhost" >> /mnt/etc/hosts
 echo "::1    localhost" >> /mnt/etc/hosts
 echo "127.0.1.1    Obelisk.local    Obelisk" >> /mnt/etc/hosts
-
 
 # Install GRUB
 arch-chroot /mnt grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id="Arch Linux"
