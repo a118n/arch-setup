@@ -24,7 +24,7 @@ swapon /dev/nvme1n1p2
 
 # Sort mirrors and install system
 reflector --verbose --sort rate --save /etc/pacman.d/mirrorlist
-pacstrap /mnt base base-devel linux linux-firmware grub efibootmgr amd-ucode man-db man-pages texinfo terminus-font htop vim curl git lsof bash-completion ttf-cascadia-code xf86-video-amdgpu vulkan-radeon libva-mesa-driver mesa-vdpau ntfs-3g networkmanager bluez gdm gnome-shell gnome-terminal gedit gnome-tweaks eog evince file-roller gnome-keyring gnome-backgrounds gnome-calculator gnome-calendar gnome-clocks gnome-control-center gnome-disk-utility gnome-screenshot gnome-weather gnome-shell-extensions gvfs gvfs-mtp gvfs-smb nautilus sushi mpv pipewire-alsa pipewire-jack pipewire-pulse lollypop telegram-desktop transmission-gtk xdg-user-dirs-gtk xdg-desktop-portal xdg-desktop-portal-gtk youtube-dl qemu libvirt virt-manager
+pacstrap /mnt base base-devel linux linux-firmware grub efibootmgr amd-ucode man-db man-pages texinfo terminus-font htop vim curl git lsof bash-completion ttf-cascadia-code xf86-video-amdgpu vulkan-radeon libva-mesa-driver mesa-vdpau ntfs-3g networkmanager bluez gdm gnome-shell gnome-terminal gedit gnome-tweaks eog evince file-roller gnome-keyring gnome-backgrounds gnome-calculator gnome-calendar gnome-clocks gnome-control-center gnome-disk-utility gnome-screenshot gnome-weather gnome-shell-extensions gvfs gvfs-mtp gvfs-smb nautilus sushi mpv pipewire-alsa pipewire-jack pipewire-pulse lollypop telegram-desktop transmission-gtk xdg-user-dirs-gtk xdg-desktop-portal xdg-desktop-portal-gtk youtube-dl qemu libvirt iptables-nft dnsmasq bridge-utils virt-manager discord docker
 
 # Generate fstab
 genfstab -U /mnt >> /mnt/etc/fstab
@@ -67,7 +67,7 @@ arch-chroot /mnt sed -i 's/^MODULES=([^)]*/&amdgpu/' /etc/mkinitcpio.conf
 arch-chroot /mnt mkinitcpio -P
 
 # Add user and change passwords
-arch-chroot /mnt useradd -m -G wheel -s /bin/bash -c "Daniel Allen" dallen
+arch-chroot /mnt useradd -m -G wheel,docker -s /bin/bash -c "Daniel Allen" dallen
 arch-chroot /mnt passwd dallen
 arch-chroot /mnt passwd
 
@@ -82,6 +82,7 @@ arch-chroot /mnt systemctl enable NetworkManager.service
 arch-chroot /mnt systemctl enable gdm.service
 arch-chroot /mnt systemctl enable bluetooth.service
 arch-chroot /mnt systemctl enable libvirtd.service
+arch-chroot /mnt systemctl enable docker.service
 
 # Unmount and reboot
 umount -R /mnt
