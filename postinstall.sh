@@ -35,16 +35,16 @@ EOF
 sudo cp ~/.config/monitors.xml /var/lib/gdm/.config/monitors.xml
 sudo chown gdm:gdm /var/lib/gdm/.config/monitors.xml
 
-# Install yay
+# Install paru
 cd /tmp
-curl -LO https://aur.archlinux.org/cgit/aur.git/snapshot/yay.tar.gz
-tar -zxvf yay.tar.gz
-cd yay
+curl -LO https://aur.archlinux.org/cgit/aur.git/snapshot/paru.tar.gz
+tar -zxvf paru.tar.gz
+cd paru
 makepkg -sri --noconfirm
-rm -rfv /tmp/yay*
+rm -rfv /tmp/paru*
 
 # Install stuff from AUR
-yay -S --noconfirm microsoft-edge-dev-bin visual-studio-code-bin spotify # gnome-shell-extension-dash-to-dock brave-bin
+paru -S --noconfirm microsoft-edge-dev-bin visual-studio-code-bin spotify # gnome-shell-extension-dash-to-dock brave-bin
 
 # Clean unnecessary desktop entries
 sudo rm -fv /usr/share/applications/avahi-discover.desktop
