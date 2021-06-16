@@ -32,7 +32,6 @@ genfstab -U /mnt >> /mnt/etc/fstab
 
 # Configure pacman
 arch-chroot /mnt sed -i 's/#Color/Color/' /etc/pacman.conf
-arch-chroot /mnt sed -i 's/#TotalDownload/TotalDownload/' /etc/pacman.conf
 arch-chroot /mnt sed -i 's/#VerbosePkgLists/VerbosePkgLists/' /etc/pacman.conf
 arch-chroot /mnt sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf
 
