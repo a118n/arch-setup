@@ -2,7 +2,7 @@
 
 set -euo pipefail
 
-# Enable localtime & NTP
+# Enable localtime & NTP (Windows Dualboot)
 timedatectl set-local-rtc 1
 timedatectl set-ntp true
 
@@ -47,15 +47,7 @@ rm -rfv /tmp/paru*
 paru -S --noconfirm microsoft-edge-dev-bin visual-studio-code-bin spotify # gnome-shell-extension-dash-to-dock brave-bin
 
 # Clean unnecessary desktop entries
-sudo rm -fv /usr/share/applications/avahi-discover.desktop
-sudo rm -fv /usr/share/applications/bssh.desktop
-sudo rm -fv /usr/share/applications/bvnc.desktop
-sudo rm -fv /usr/share/applications/htop.desktop
-sudo rm -fv /usr/share/applications/lstopo.desktop
-sudo rm -fv /usr/share/applications/nm-connection-editor.desktop
-sudo rm -fv /usr/share/applications/qv4l2.desktop
-sudo rm -fv /usr/share/applications/qvidcap.desktop
-sudo rm -fv /usr/share/applications/vim.desktop
+chmod +x cleanup.sh && ./cleanup.sh
 
 # Reset app grid to alphabetical default
 gsettings set org.gnome.shell app-picker-layout "[]"
