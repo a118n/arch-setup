@@ -25,7 +25,27 @@ swapon /dev/nvme1n1p2
 # Sort mirrors and install system
 reflector --verbose --sort rate --save /etc/pacman.d/mirrorlist
 # sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf
-pacstrap /mnt base base-devel linux linux-firmware grub efibootmgr amd-ucode man-db man-pages texinfo terminus-font htop vim curl git lsof bash-completion ttf-cascadia-code xf86-video-amdgpu mesa lib32-mesa vulkan-radeon lib32-vulkan-radeon libva-mesa-driver mesa-vdpau ntfs-3g networkmanager baobab bluez gdm gnome-shell gnome-terminal gedit gnome-tweaks eog evince file-roller gnome-keyring gnome-backgrounds gnome-calculator gnome-calendar gnome-clocks gnome-control-center gnome-disk-utility gnome-remote-desktop gnome-screenshot gnome-system-monitor gnome-user-share gnome-weather gnome-shell-extensions gvfs gvfs-mtp gvfs-smb nautilus sushi mpv pipewire-alsa pipewire-jack pipewire-pulse lollypop telegram-desktop transmission-gtk xdg-user-dirs-gtk xdg-desktop-portal xdg-desktop-portal-gtk youtube-dl qemu libvirt iptables-nft dnsmasq bridge-utils edk2-ovmf virt-manager discord docker steam
+
+# Base
+pacstrap /mnt base base-devel linux linux-firmware grub efibootmgr amd-ucode bash-completion bluez curl git htop lsof man-db man-pages networkmanager ntfs-3g terminus-font texinfo vim
+
+# Video
+pacstrap /mnt libva-mesa-driver mesa mesa-vdpau vulkan-radeon xf86-video-amdgpu # lib32-mesa lib32-vulkan-radeon
+
+# GNOME
+# pacstrap /mnt baobab eog evince file-roller gdm gedit gnome-backgrounds gnome-calculator gnome-calendar gnome-clocks gnome-control-center gnome-disk-utility gnome-keyring gnome-remote-desktop gnome-screenshot gnome-shell gnome-shell-extensions gnome-system-monitor gnome-terminal gnome-tweaks gnome-user-share gnome-weather gvfs gvfs-mtp gvfs-smb lollypop nautilus sushi transmission-gtk xdg-desktop-portal xdg-desktop-portal-gtk xdg-user-dirs-gtk
+
+# KDE
+pacstrap /mnt plasma-desktop plasma-wayland-session sddm sddm-kcm
+
+# Multimedia
+pacstrap /mnt mpv pipewire-alsa pipewire-jack pipewire-pulse youtube-dl
+
+# Containers & Virtualization
+pacstrap /mnt bridge-utils dnsmasq docker edk2-ovmf iptables-nft libvirt qemu virt-manager
+
+# Misc
+pacstrap /mnt ttf-cascadia-code # telegram-desktop
 
 # Generate fstab
 genfstab -U /mnt >> /mnt/etc/fstab
@@ -79,7 +99,8 @@ arch-chroot /mnt systemctl enable fstrim.timer
 
 # Enable necessary services
 arch-chroot /mnt systemctl enable NetworkManager.service
-arch-chroot /mnt systemctl enable gdm.service
+# arch-chroot /mnt systemctl enable gdm.service # For GNOME
+arch-chroot /mnt systemctl enable sddm.service # For KDE
 arch-chroot /mnt systemctl enable bluetooth.service
 arch-chroot /mnt systemctl enable libvirtd.service
 arch-chroot /mnt systemctl enable docker.service
