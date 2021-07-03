@@ -27,16 +27,16 @@ reflector --verbose --sort rate --save /etc/pacman.d/mirrorlist
 # sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf
 
 # Base
-pacstrap /mnt base base-devel linux linux-firmware grub efibootmgr amd-ucode bash-completion bluez curl git htop lsof man-db man-pages networkmanager ntfs-3g terminus-font texinfo vim
+pacstrap /mnt base base-devel linux linux-firmware grub efibootmgr amd-ucode bash-completion bluez curl git htop lsof man-db man-pages networkmanager ntfs-3g texinfo vim
 
 # Video
 pacstrap /mnt libva-mesa-driver mesa mesa-vdpau vulkan-radeon xf86-video-amdgpu # lib32-mesa lib32-vulkan-radeon
 
 # GNOME
-# pacstrap /mnt baobab eog evince file-roller gdm gedit gnome-backgrounds gnome-calculator gnome-calendar gnome-clocks gnome-control-center gnome-disk-utility gnome-keyring gnome-remote-desktop gnome-screenshot gnome-shell gnome-shell-extensions gnome-system-monitor gnome-terminal gnome-tweaks gnome-user-share gnome-weather gvfs gvfs-mtp gvfs-smb lollypop nautilus sushi transmission-gtk xdg-desktop-portal xdg-desktop-portal-gtk xdg-user-dirs-gtk
+pacstrap /mnt baobab eog evince file-roller gdm gedit gnome-backgrounds gnome-calculator gnome-calendar gnome-clocks gnome-control-center gnome-disk-utility gnome-keyring gnome-remote-desktop gnome-screenshot gnome-shell gnome-shell-extensions gnome-system-monitor gnome-terminal gnome-tweaks gnome-user-share gnome-weather gvfs gvfs-mtp gvfs-smb lollypop nautilus sushi transmission-gtk xdg-desktop-portal xdg-desktop-portal-gtk xdg-user-dirs-gtk
 
 # KDE
-pacstrap /mnt plasma-desktop plasma-wayland-session sddm sddm-kcm
+# pacstrap /mnt plasma plasma-wayland-session sddm sddm-kcm
 
 # Multimedia
 pacstrap /mnt mpv pipewire-alsa pipewire-jack pipewire-pulse youtube-dl
@@ -45,7 +45,7 @@ pacstrap /mnt mpv pipewire-alsa pipewire-jack pipewire-pulse youtube-dl
 pacstrap /mnt bridge-utils dnsmasq docker edk2-ovmf iptables-nft libvirt qemu virt-manager
 
 # Misc
-pacstrap /mnt ttf-cascadia-code # telegram-desktop
+pacstrap /mnt terminus-font ttf-cascadia-code # telegram-desktop
 
 # Generate fstab
 genfstab -U /mnt >> /mnt/etc/fstab
@@ -66,10 +66,10 @@ echo "LANG=en_US.UTF-8"  > /mnt/etc/locale.conf
 echo "FONT=ter-132n" > /mnt/etc/vconsole.conf
 
 # Configure hostname
-echo "Obelisk" > /mnt/etc/hostname
+echo "obelisk" > /mnt/etc/hostname
 echo "127.0.0.1    localhost" >> /mnt/etc/hosts
 echo "::1    localhost" >> /mnt/etc/hosts
-echo "127.0.1.1    Obelisk.local    Obelisk" >> /mnt/etc/hosts
+echo "127.0.1.1    obelisk.local    obelisk" >> /mnt/etc/hosts
 
 # Install GRUB
 arch-chroot /mnt grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id="Arch Linux"
@@ -99,8 +99,8 @@ arch-chroot /mnt systemctl enable fstrim.timer
 
 # Enable necessary services
 arch-chroot /mnt systemctl enable NetworkManager.service
-# arch-chroot /mnt systemctl enable gdm.service # For GNOME
-arch-chroot /mnt systemctl enable sddm.service # For KDE
+arch-chroot /mnt systemctl enable gdm.service # For GNOME
+# arch-chroot /mnt systemctl enable sddm.service # For KDE
 arch-chroot /mnt systemctl enable bluetooth.service
 arch-chroot /mnt systemctl enable libvirtd.service
 arch-chroot /mnt systemctl enable docker.service
