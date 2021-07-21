@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-set -euo pipefail
-
 # Enable localtime & NTP (Windows Dualboot)
 timedatectl set-local-rtc 1
 timedatectl set-ntp true
@@ -44,10 +42,19 @@ makepkg -sri --noconfirm
 rm -rfv /tmp/paru*
 
 # Install stuff from AUR
-paru -S --noconfirm microsoft-edge-dev-bin visual-studio-code-bin spotify # gnome-shell-extension-dash-to-dock brave-bin
+paru -S --noconfirm microsoft-edge-dev-bin visual-studio-code-bin
+curl -sS https://download.spotify.com/debian/pubkey_0D811D58.gpg | gpg --import -
+paru -S --noconfirm spotify
 
 # Clean unnecessary desktop entries
 chmod +x cleanup.sh && ./cleanup.sh
+
+# Clean orphans
+pacman -Qttdq | sudo pacman -Rscn --noconfirm -
+
+# Clean cache
+rm -rfv ~/.cache/*
+rm -rfv ~/.cargo
 
 # Reset app grid to alphabetical default
 gsettings set org.gnome.shell app-picker-layout "[]"
