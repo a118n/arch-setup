@@ -10,3 +10,13 @@ sudo rm -vf /usr/share/applications/qv4l2.desktop
 sudo rm -vf /usr/share/applications/qvidcap.desktop
 sudo rm -vf /usr/share/applications/vim.desktop
 sudo rm -vf /usr/share/applications/lstopo.desktop
+sudo rm -vf /usr/share/applications/assistant.desktop
+sudo rm -vf /usr/share/applications/designer.desktop
+sudo rm -vf /usr/share/applications/linguist.desktop
+sudo rm -vf /usr/share/applications/UserFeedbackConsole.desktop
+sudo rm -vf /usr/share/applications/qdbusviewer.desktop
+sudo rm -vf /usr/share/applications/org.kde.plasmaengineexplorer.desktop
+sudo rm -vf /usr/share/applications/org.kde.plasma.themeexplorer.desktop
+sudo rm -vf /usr/share/applications/org.kde.plasma.lookandfeelexplorer.desktop
+sudo rm -vf /usr/share/applications/org.kde.cuttlefish.desktop
+sudo rm -vf /usr/share/applications/org.kde.plasma.emojier.desktop
