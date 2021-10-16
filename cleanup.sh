@@ -11,6 +11,7 @@ sudo rm -vf /usr/share/applications/qvidcap.desktop
 sudo rm -vf /usr/share/applications/vim.desktop
 sudo rm -vf /usr/share/applications/lstopo.desktop
 sudo rm -vf /usr/share/applications/assistant.desktop
+sudo rm -vf /usr/share/applications/cmake-gui.desktop
 sudo rm -vf /usr/share/applications/designer.desktop
 sudo rm -vf /usr/share/applications/linguist.desktop
 sudo rm -vf /usr/share/applications/UserFeedbackConsole.desktop

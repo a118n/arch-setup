@@ -26,25 +26,31 @@ swapon /dev/nvme1n1p2
 reflector --verbose --protocol https --connection-timeout 2 --download-timeout 2 --score 0 --latest 50 --sort rate --save /etc/pacman.d/mirrorlist
 
 # Base
-pacstrap /mnt base base-devel linux linux-firmware grub os-prober efibootmgr amd-ucode bash-completion bluez curl git htop lsof man-db man-pages networkmanager ntfs-3g texinfo vim
+pacstrap /mnt base base-devel linux-zen linux-firmware grub os-prober efibootmgr amd-ucode bash-completion bluez curl git htop lsof man-db man-pages networkmanager ntfs-3g texinfo vim
 
 # Video
-pacstrap /mnt libva-mesa-driver mesa mesa-vdpau vulkan-radeon xf86-video-amdgpu
+pacstrap /mnt libva-mesa-driver mesa mesa-vdpau vulkan-radeon xf86-video-amdgpu lib32-mesa lib32-vulkan-radeon libva-mesa-driver lib32-libva-mesa-driver mesa-vdpau lib32-mesa-vdpau vulkan-tools
 
 # GNOME
-# pacstrap /mnt baobab eog evince file-roller gdm gedit gnome-backgrounds gnome-calculator gnome-calendar gnome-clocks gnome-control-center gnome-disk-utility gnome-keyring gnome-remote-desktop gnome-screenshot gnome-shell gnome-shell-extensions gnome-system-monitor gnome-terminal gnome-tweaks gnome-user-share gnome-weather gvfs gvfs-mtp gvfs-smb lollypop nautilus sushi transmission-gtk xdg-desktop-portal xdg-desktop-portal-gtk xdg-user-dirs-gtk
+pacstrap /mnt baobab eog evince file-roller gdm gedit gnome-backgrounds gnome-calculator gnome-calendar gnome-clocks gnome-control-center gnome-disk-utility gnome-keyring gnome-remote-desktop gnome-screenshot gnome-shell gnome-shell-extensions gnome-system-monitor gnome-terminal gnome-tweaks gnome-user-share gnome-weather gvfs gvfs-mtp gvfs-smb lollypop nautilus power-profiles-daemon sushi transmission-gtk xdg-desktop-portal xdg-desktop-portal-gtk xdg-user-dirs-gtk
 
 # KDE
-pacstrap /mnt plasma plasma-wayland-session sddm sddm-kcm dolphin konsole kate ark p7zip unrar ffmpegthumbs filelight gwenview qt5-imageformats kcalc kdegraphics-thumbnailers kdenetwork-filesharing kdeplasma-addons kdialog okular partitionmanager samba spectacle
+# pacstrap /mnt plasma plasma-wayland-session sddm sddm-kcm dolphin konsole kate ark p7zip unrar ffmpegthumbs filelight gwenview qt5-imageformats kcalc kdegraphics-thumbnailers kdenetwork-filesharing kdeplasma-addons kdialog okular partitionmanager samba spectacle
 
 # Multimedia
 pacstrap -i /mnt mpv pipewire-alsa pipewire-jack pipewire-pulse youtube-dl
 
+# Gaming
+pacstrap -i /mnt steam discord
+
 # Containers & Virtualization
-# pacstrap -i /mnt bridge-utils dnsmasq docker edk2-ovmf iptables-nft libvirt qemu virt-manager
+pacstrap -i /mnt bridge-utils dnsmasq docker edk2-ovmf iptables-nft libvirt qemu virt-manager
+
+# Ansible
+pacstrap -i /mnt ansible ansible-lint yamllint
 
 # Misc
-pacstrap /mnt terminus-font ttf-cascadia-code
+pacstrap /mnt terminus-font ttf-cascadia-code firefox
 
 # Generate fstab
 genfstab -U /mnt >> /mnt/etc/fstab
@@ -53,7 +59,7 @@ genfstab -U /mnt >> /mnt/etc/fstab
 arch-chroot /mnt sed -i 's/#Color/Color/' /etc/pacman.conf
 arch-chroot /mnt sed -i 's/#ParallelDownloads = 5/ParallelDownloads = 5/' /etc/pacman.conf
 arch-chroot /mnt sed -i 's/#VerbosePkgLists/VerbosePkgLists/' /etc/pacman.conf
-# arch-chroot /mnt sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf # Enable Multilib
+arch-chroot /mnt sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf # Enable Multilib
 
 # Configure timezone and locale
 arch-chroot /mnt ln -sf /usr/share/zoneinfo/Europe/Moscow /etc/localtime
@@ -89,7 +95,7 @@ arch-chroot /mnt sed -i 's/^MODULES=([^)]*/&amdgpu/' /etc/mkinitcpio.conf
 arch-chroot /mnt mkinitcpio -P
 
 # Add user and change passwords
-arch-chroot /mnt useradd -m -G wheel -s /bin/bash -c "Daniel Allen" dallen
+arch-chroot /mnt useradd -m -G audio,docker,libvirt,wheel -s /bin/bash -c "Daniel Allen" dallen
 arch-chroot /mnt passwd dallen
 arch-chroot /mnt passwd
 
@@ -101,11 +107,11 @@ arch-chroot /mnt systemctl enable fstrim.timer
 
 # Enable necessary services
 arch-chroot /mnt systemctl enable NetworkManager.service
-# arch-chroot /mnt systemctl enable gdm.service
-arch-chroot /mnt systemctl enable sddm.service
+arch-chroot /mnt systemctl enable gdm.service
+# arch-chroot /mnt systemctl enable sddm.service
 arch-chroot /mnt systemctl enable bluetooth.service
-# arch-chroot /mnt systemctl enable libvirtd.service
-# arch-chroot /mnt systemctl enable docker.service
+arch-chroot /mnt systemctl enable libvirtd.service
+arch-chroot /mnt systemctl enable docker.service
 
 # Unmount and reboot
 umount -R /mnt
