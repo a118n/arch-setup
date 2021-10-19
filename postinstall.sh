@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+cwd=$(pwd)
+
 # Enable localtime & NTP (Windows Dualboot)
 timedatectl set-local-rtc 1
 timedatectl set-ntp true
@@ -34,12 +36,12 @@ sudo cp ~/.config/monitors.xml /var/lib/gdm/.config/monitors.xml
 sudo chown gdm:gdm /var/lib/gdm/.config/monitors.xml
 
 # Install paru
-cd /tmp
-curl -LO https://aur.archlinux.org/cgit/aur.git/snapshot/paru.tar.gz
-tar -zxvf paru.tar.gz
-cd paru
-makepkg -sri --noconfirm
+# cd /tmp
+curl -L https://aur.archlinux.org/cgit/aur.git/snapshot/paru.tar.gz -o /tmp/paru.tar.gz
+tar -zxvf /tmp/paru.tar.gz -C /tmp/
+cd /tmp/paru && makepkg -sri --noconfirm
 rm -rfv /tmp/paru*
+cd $cwd
 
 # Install stuff from AUR
 paru -S --noconfirm visual-studio-code-bin spotify corectrl
