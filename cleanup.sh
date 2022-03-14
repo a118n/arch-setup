@@ -21,3 +21,8 @@ sudo rm -vf /usr/share/applications/org.kde.plasma.themeexplorer.desktop
 sudo rm -vf /usr/share/applications/org.kde.plasma.lookandfeelexplorer.desktop
 sudo rm -vf /usr/share/applications/org.kde.cuttlefish.desktop
 sudo rm -vf /usr/share/applications/org.kde.plasma.emojier.desktop
+sudo rm -vf /usr/share/applications/java-java11-openjdk.desktop
+sudo rm -vf /usr/share/applications/jconsole-java11-openjdk.desktop
+sudo rm -vf /usr/share/applications/jshell-java11-openjdk.desktop
+sudo rm -vf /usr/share/applications/ipython.desktop
+sudo rm -vf /usr/share/applications/jupyter-notebook.desktop
