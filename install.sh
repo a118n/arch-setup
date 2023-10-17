@@ -71,7 +71,7 @@ echo "::1    localhost" >> /mnt/etc/hosts
 echo "127.0.1.1    obelisk" >> /mnt/etc/hosts
 
 # Install GRUB
-arch-chroot /mnt grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id="Arch Linux"
+arch-chroot /mnt grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id="Arch Linux"
 # Disable CPU mitigations
 arch-chroot /mnt sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT="[^"]*/& mitigations=off/' /etc/default/grub
 # Enable full AMD GPU control
