@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 
 cwd=$(pwd)
+sudo ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 
 # Enable localtime & NTP (Windows Dualboot)
-timedatectl set-local-rtc 1
-timedatectl set-ntp true
+# timedatectl set-local-rtc 1
+# timedatectl set-ntp true
 
 # Configure monitor for GNOME & GDM
 cat <<-EOF > ~/.config/monitors.xml
