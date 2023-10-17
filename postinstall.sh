@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 cwd=$(pwd)
+
 sudo ln -sf /run/systemd/resolve/stub-resolv.conf /etc/resolv.conf
 
 # Enable localtime & NTP (Windows Dualboot)
