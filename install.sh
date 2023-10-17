@@ -4,7 +4,7 @@ set -euo pipefail
 
 # Preliminary stuff
 setfont ter-132n
-iwctl --passphrase pYq4RQmT station wlan0 connect MGTS_GPON5_51EF
+iwctl --passphrase tPvA2Fhb station wlan0 connect Keenetic-8886
 sleep 10
 timedatectl set-ntp true
 
