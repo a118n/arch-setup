@@ -63,7 +63,6 @@ arch-chroot /mnt sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf # En
 
 # Configure timezone and locale
 arch-chroot /mnt ln -sf /usr/share/zoneinfo/Europe/Moscow /etc/localtime
-arch-chroot /mnt timedatectl set-timezone Europe/Moscow
 arch-chroot /mnt sed -i 's/#en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /etc/locale.gen
 arch-chroot /mnt locale-gen
 echo "LANG=en_US.UTF-8"  > /mnt/etc/locale.conf
