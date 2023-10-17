@@ -29,7 +29,7 @@ reflector --verbose --protocol https --connection-timeout 2 --download-timeout 2
 pacstrap /mnt base base-devel linux-zen linux-firmware grub os-prober efibootmgr amd-ucode bash-completion bluez curl git htop lsof man-db man-pages networkmanager ntfs-3g texinfo tree vim
 
 # Video
-pacstrap /mnt libva-mesa-driver mesa mesa-vdpau vulkan-radeon xf86-video-amdgpu lib32-mesa lib32-vulkan-radeon libva-mesa-driver lib32-libva-mesa-driver mesa-vdpau lib32-mesa-vdpau vulkan-tools
+pacstrap /mnt libva-mesa-driver mesa mesa-vdpau vulkan-radeon xf86-video-amdgpu libva-mesa-driver mesa-vdpau vulkan-tools
 
 # GNOME
 pacstrap /mnt baobab eog evince file-roller gdm gedit gnome-backgrounds gnome-calculator gnome-calendar gnome-clocks gnome-control-center gnome-disk-utility gnome-keyring gnome-remote-desktop gnome-screenshot gnome-shell gnome-shell-extensions gnome-system-monitor gnome-terminal gnome-tweaks gnome-user-share gnome-weather gvfs gvfs-mtp gvfs-smb lollypop nautilus power-profiles-daemon sushi transmission-gtk xdg-desktop-portal xdg-desktop-portal-gtk xdg-user-dirs-gtk
