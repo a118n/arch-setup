@@ -68,7 +68,7 @@ echo "FONT=ter-132n" > /mnt/etc/vconsole.conf
 echo "obelisk" > /mnt/etc/hostname
 echo "127.0.0.1    localhost" >> /mnt/etc/hosts
 echo "::1    localhost" >> /mnt/etc/hosts
-echo "127.0.1.1    obelisk.local    obelisk" >> /mnt/etc/hosts
+echo "127.0.1.1    obelisk" >> /mnt/etc/hosts
 
 # Install GRUB
 arch-chroot /mnt grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id="Arch Linux"
