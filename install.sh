@@ -26,7 +26,7 @@ swapon /dev/nvme1n1p2
 reflector --verbose --protocol https --connection-timeout 2 --download-timeout 2 --score 0 --latest 50 --sort rate --save /etc/pacman.d/mirrorlist
 
 # Base
-pacstrap /mnt base base-devel linux linux-rt linux-firmware grub efibootmgr amd-ucode bash-completion bluez curl wget jq git htop lsof man-db man-pages networkmanager ntfs-3g texinfo tree vim
+pacstrap /mnt base base-devel linux linux-rt linux-firmware grub efibootmgr amd-ucode bash-completion bind bluez curl wget jq git htop lsof man-db man-pages networkmanager networkmanager-openconnect usbutils ntfs-3g texinfo tree vim
 
 # Video
 pacstrap /mnt mesa mesa-vdpau vulkan-radeon libva-mesa-driver mesa-vdpau vulkan-tools #xf86-video-amdgpu
